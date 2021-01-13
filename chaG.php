@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <title>Armazém Granel - Produtos</title>
+    <link rel="icon" href="img/logoOficial.png" class="navbar-brand">
+  </head>
+  <body>
+    <div id="fundoTodos">
+      <header> <!--inicio header-->
+        <nav class="navbar navbar-expand-md navbar-light navbar-transparente"> <!--inicio nav-->
+          <div class="container"> <!--inicio container-->
+            <img src="img/logoOficial.png" width="100">
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">  <!--inicio button-->
+              <i class="fas fa-bars text-white"></i>
+            </button> <!--final button-->
+
+            <div class="collapse navbar-collapse" id="nav-principal"> <!-- inicio div collapse-->
+
+              <ul class="navbar-nav ml-auto"> <!--inicio ul-->
+                <li class="nav-item">
+                  <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="sobreNos.html" class="nav-link">Sobre nós</a>
+                </li>
+                <li class="nav-item">
+                  <a href="categorias.html" class="nav-link navAtivo">Produtos</a>
+                </li>
+                <li class="nav-item">
+                  <a href="embalagens.php" class="nav-link">Embalagens</a>
+                </li>
+                <li class="nav-item">
+                  <a href="cartões.html" class="nav-link">Cartões</a>
+                </li>
+              
+                <li class="nav-item">
+                  <a href="contato.html" class="nav-link">Contato</a>
+                </li>
+
+                <li class="nav-item divisor">
+                
+                </li>
+                <li class="nav-item">
+                  <a href="login.html" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a href="cadastro.html" class="nav-link ">Cadastrar</a>
+                </li>
+
+
+              </ul> <!--final ul-->
+
+            </div> <!--final div collapse-->
+
+          </div> <!--final container-->
+
+        </nav> <!--final nav-->
+
+      </header> <!--final header-->
+
+      <section id="homeProdutos">
+        <div class="container containerCustom clearfix">
+          <div class="container2 clearfix">
+
+          <nav class="navbar navbar-expand-sm">
+        <!-- Logo -->
+
+        <!-- navegacao -->
+        <ul class="navbar-nav ml-auto navbar-light">
+            <li class="nav-item">              
+                <a href="chaG.php" class="btn btn-info customButom customButomAtivo">Gramas</a>
+            </li>
+            <li class="nav-item divisor">
+                
+            </li>
+            <li class="nav-item">              
+                <a href="chaK.php" class="btn btn-info customButom ">Quilograma</a>
+            </li>
+        </ul>
+    </nav>
+            
+          
+                <h2>Hortaliças</h2>
+
+            <!-- inicio abacate -->
+
+            <?php 	
+
+                  session_start();
+
+                  include_once 'Banco.php';
+
+
+                      $result = mysqli_query($con,"SELECT * FROM tb_cha ORDER BY nome_cha");
+
+                      
+                        while($dados = mysqli_fetch_array($result)){
+                        $NomeCha = $dados['nome_cha'];
+                        $valorCha  = $dados['valor_cha'];
+                        $imgCha = $dados['img_cha'];
+                        
+                      
+                ?>
+            
+                  <div class="produtos">
+                    <div class="row">
+                      <div class="col">
+                        <img src="imgProdutos/<?php echo $imgCha?>" class="imgCustomProdutos">
+                      </div>
+                      
+                      <div class="col">
+                        
+                          <form action="produtos.php" method="post">
+                            <input class="form-control customInput d-none" type="text" value="<?php echo $imgCha?>" name="img" ReadOnly>
+                            <input class="form-control customInput" type="text" value="<?php echo $NomeCha?>" name="nomeProduto" ReadOnly>
+                            <input class="form-control customInput" type="text" value="R$ <?php echo $valorCha?>" name="valor" ReadOnly>
+                            <input class="form-control customInput" type="number" placeholder="Quantidade" name="quantidade" width="200">
+                            <span class="customSpan">100 gramas</span>
+                            <input class="form-control customInput d-none" type="text" value="100 gramas" name="tipo" ReadOnly>
+                            <input class="form-control customInput d-none" type="text" value="" name="tamanho" ReadOnly>
+                            <input class="form-control customInput d-none" type="text" value="chaG" name="pagina" ReadOnly>
+                            <button class="btn btn-info customInput" type="submit" name="btn-adicionar" id="botaoAdicionar">Adicionar ao carrinho</button>
+                          </form>
+                      </div>
+                      
+                    </div>
+                  </div>
+
+                <?php }
+                 ?>
+
+
+            <!-- final abacate -->
+
+
+            
+            
+
+            
+            
+            
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="mt-3">
+            <span>
+              &copy; Copyright - 2020 | Armazém Granel - Pedro Esteves
+          </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
